@@ -1,6 +1,6 @@
 # Gourav Bathwal — Portfolio
 
-Live: **https://mr-bathwal.github.io/portfolio/**
+Live: **https://portfolio-yga8.vercel.app/**
 
 A motion-first portfolio built from scratch: a home page plus a full case-study page for every project.
 
