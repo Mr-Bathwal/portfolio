@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "cd source && npm ci",
+  "buildCommand": "cd source && npx vite build --base / && node scripts/pages.mjs",
+  "outputDirectory": "source/dist",
+  "trailingSlash": true
+}

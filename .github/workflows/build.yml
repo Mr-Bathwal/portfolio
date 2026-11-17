@@ -25,7 +25,7 @@ jobs:
         working-directory: source
       - name: Publish the build at the site root
         run: |
-          find . -maxdepth 1 -mindepth 1 ! -name source ! -name .git ! -name .github ! -name README.md ! -name .gitignore ! -name .nojekyll -exec rm -rf {} +
+          find . -maxdepth 1 -mindepth 1 ! -name source ! -name .git ! -name .github ! -name README.md ! -name .gitignore ! -name .nojekyll ! -name vercel.json -exec rm -rf {} +
           cp -r source/dist/. .
           touch .nojekyll
       - name: Commit the built site
