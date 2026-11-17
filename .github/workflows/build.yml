@@ -25,13 +25,13 @@ jobs:
         working-directory: source
       - name: Publish the build at the site root
         run: |
-          find . -maxdepth 1 -mindepth 1 ! -name source ! -name .git ! -name .github ! -name README.md -exec rm -rf {} +
+          find . -maxdepth 1 -mindepth 1 ! -name source ! -name .git ! -name .github ! -name README.md ! -name .gitignore ! -name .nojekyll -exec rm -rf {} +
           cp -r source/dist/. .
           touch .nojekyll
       - name: Commit the built site
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
+          git add -A -- . ':!source/node_modules' ':!source/dist'
           git diff --cached --quiet || git commit -m "Build site from source"
           git push
