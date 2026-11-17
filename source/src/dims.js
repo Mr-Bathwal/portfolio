@@ -1,0 +1,23 @@
+// Generated from public/work: pixel size of each full-size screenshot, used to reserve layout space.
+export const DIMS = {
+  "algo-hero": [1440,900],
+  "algo-wallet": [1440,900],
+  "aurora-console": [1600,872],
+  "aurora-dashboard": [1600,870],
+  "aurora-graph": [1600,882],
+  "aurora-landing": [1600,983],
+  "aurora-scene": [1032,635],
+  "aurora-workflow": [1600,983],
+  "axiom-pulse": [1600,878],
+  "axiom-table": [1600,999],
+  "cutlist-desk": [1440,900],
+  "cutlist-hero": [1440,900],
+  "match-board": [1440,900],
+  "match-hero": [1440,900],
+  "match-matches": [1440,900],
+  "match-points": [1600,1000],
+  "ticket-auction": [1600,1000],
+  "ticket-landing": [1600,1000],
+  "ticket-market": [1600,1000],
+  "ticket-profile": [1600,1000],
+};
