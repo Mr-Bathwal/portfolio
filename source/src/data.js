@@ -173,7 +173,7 @@ export const PROJECTS = [
       "match-points": "Odds-weighted scoring: bold calls earn bigger points.",
       "match-board": "The table: a podium leaderboard where every score is backed by an on-chain proof.",
     },
-    links: { code: "https://github.com/Mr-Bathwal/TXodds_WC" },
+    links: { live: "https://t-xodds-wc.vercel.app", code: "https://github.com/Mr-Bathwal/TXodds_WC" },
   },
   {
     slug: "cutlist",
@@ -380,7 +380,7 @@ export const PROJECTS = [
       "pf-numbers": "Every figure with its denominator, read from the eval's own JSON when the page loads.",
       "pf-policy": "Sixteen rules in a Markdown document, each with the number of scenarios that cite it.",
     },
-    links: { live: "https://procureflow-nu-ten.vercel.app", code: "https://github.com/Mr-Bathwal/ERP" },
+    links: { live: "https://procureflow-nu-ten.vercel.app", code: "https://github.com/Mr-Bathwal/procureflow" },
   },
 ];
 
