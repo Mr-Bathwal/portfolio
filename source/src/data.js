@@ -336,6 +336,52 @@ export const PROJECTS = [
     },
     links: { live: "https://mr-bathwal.github.io/Avalanche-Hacking/", code: "https://github.com/Mr-Bathwal/Avalanche-Hacking" },
   },
+  {
+    slug: "procureflow",
+    title: "ProcureFlow",
+    kicker: "An ERP agent that verifies its own writes",
+    context: "Independent project · ERPNext procure-to-pay",
+    year: "2026",
+    scope: "Agent graph · Policy engine · Evaluation record",
+    cats: ["ai", "fullstack"],
+    accent: "#ddd6c7",
+    summary:
+      "An agent that runs procure-to-pay inside ERPNext and treats every one of its own actions as something to verify rather than trust. Every write is read back and compared, every decision cites a rule from a written policy, and the published evaluation record recomputes its figures in the browser from the committed results file.",
+    overview: [
+      "ProcureFlow reads a purchase-request email or a supplier quote, checks it against a procurement policy of sixteen written rules, raises the Material Request and the Purchase Order in ERPNext, stops for a named approver with the authority to say yes, then records the goods receipt and the invoice and runs a three-way match. The model only reads: everything that decides is deterministic, in integer paise, and cites the rule it applied.",
+      "The premise is that an HTTP 200 means ERPNext accepted a request, not that the stored document says what the agent believes it says. So every write is read back and compared, and a failure to verify is its own error type that is never folded into a generic one. The evaluation record is a static page that reads the committed results JSON in the browser, so no figure on it can drift from the repository.",
+    ],
+    problem:
+      "Agent demos stop at the happy path: the call returned 200, the screenshot looks right, the run is declared a success. In a finance workflow that gap is where the money goes — a retry that quietly creates a second purchase order, an approval given for one total and submitted against another, an invoice paid without anyone checking what actually arrived.",
+    features: [
+      ["Every write is read back", "A document is created, then fetched and compared field by field. VerificationError is its own type and is never folded into a generic ERP error."],
+      ["The approval is bound to a digest", "An approval is tied to a SHA-256 digest of exactly what the approver saw. Before submitting, the order is re-read and the digest recomputed; if they differ, the approval is void and nothing is submitted."],
+      ["A policy you can read", "Sixteen rules live in a Markdown document rather than in the code. The agent parses them, cites a rule id on every decision, and fails closed if a rule cannot be read."],
+      ["Idempotent retries", "Every create carries an idempotency key in a unique ERPNext field, so after an ambiguous timeout the agent looks the document up before re-sending it."],
+      ["Documents are screened first", "Hidden PDF text, invisible Unicode, embedded instructions and bank-detail changes are caught before any model reads the file, and every extracted value must appear on the page."],
+      ["A fixed graph, not a free agent", "Eleven nodes in one direction. submit_purchase_order is reachable only through the approval gate, which the test suite asserts rather than the prompt requesting it."],
+    ],
+    decisions: [
+      "The policy is a document, not configuration: a finance owner can change a threshold without touching Python, and every decision quotes the rule id it applied.",
+      "Money is integer paise through Decimal. No float ever touches a total.",
+      "The agent cannot create a Supplier. Master data is read-only in the allowlist, and a test asserts that it stays that way.",
+      "The whole suite runs against an in-memory ERPNext double, so the evaluation is reproducible offline and in CI with no credentials and no spend.",
+      "Every figure on the evaluation page is computed in the browser from the committed results file; none is typed into the markup.",
+    ],
+    next: "A live ERPNext run behind the same verification contract, and an extraction pass with a real model. Both are recorded on the page as not yet run rather than estimated.",
+    metrics: [["48/48", "scenarios in the v3 suite"], ["0", "of 33 that should stop went through"], ["239", "offline tests, no credentials"]],
+    stack: ["Python 3.11", "LangGraph", "LangChain Core", "Pydantic v2", "ChromaDB", "FastAPI", "httpx", "pypdf", "pytest", "Hypothesis", "GitHub Actions", "GSAP", "three.js"],
+    images: ["pf-hero", "pf-flow", "pf-attacks", "pf-approval", "pf-numbers", "pf-policy"],
+    captions: {
+      "pf-hero": "The premise, stated plainly: a successful-looking write is not a completed write.",
+      "pf-flow": "The eleven nodes read sideways, one card per node, in the only order the graph allows.",
+      "pf-attacks": "Untrusted input: hidden instructions and bank-detail changes, each quarantined before a model read the file.",
+      "pf-approval": "The approval is void — the order was edited while it waited, the digests differ, and nothing was submitted.",
+      "pf-numbers": "Every figure with its denominator, read from the eval's own JSON when the page loads.",
+      "pf-policy": "Sixteen rules in a Markdown document, each with the number of scenarios that cite it.",
+    },
+    links: { live: "https://procureflow-nu-ten.vercel.app", code: "https://github.com/Mr-Bathwal/ERP" },
+  },
 ];
 
 export const MORE = [
